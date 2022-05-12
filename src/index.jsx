@@ -2,20 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {
-  Routes,
-  Route,
-  HashRouter
-} from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 
 import store from './app/store'
 import { Provider } from 'react-redux'
-
-import PageNotFound from './routes/pageNotFound'
-import Home from './routes/home'
-
 import themeLoader from './theme/themeLoader';
+
+const { ipcRenderer } = window.require('electron')
+
+ipcRenderer.send('client-ready')
+ipcRenderer.on('hello-client', (event, arg) => { 
+  ipcRenderer.send('hello-client-from-client', 'Hello from client')
+})
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,17 +29,7 @@ function MyApp() {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/home" element={<Home />}></Route>
-          </Route>
-            <Route
-              path="*"
-              element={<PageNotFound />}
-            />
-        </Routes>
-      </HashRouter>
+      <App />
     </ThemeProvider>
   )
   

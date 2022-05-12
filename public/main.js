@@ -1,18 +1,43 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 const path = require('path')
 const isDev = require('electron-is-dev')
 
 require('@electron/remote/main').initialize()
 
-function createWindow() {
+let win = null, server = null;
+
+ipcMain.on('server-ready', (event, arg) => {
+  server.webContents.send('hello-server', 'Hello server');
+})
+
+ipcMain.on('hello-client-from-server', (event, arg) => {
+  console.log("HELLO FROM SERVER")
+})
+
+ipcMain.on('client-ready', (event, arg) => { 
+  console.log('CLIENT READY');
+  win.webContents.send('hello-client', 'Hello from client');
+})
+
+ipcMain.on('hello-client-from-client', (event, arg) => { 
+  console.log('HELLO FROM CLIENT');
+})
+
+function createWindow() { 
+  createClient();
+  createServer();  
+}
+
+function createClient() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      contextIsolation:false
     }
   })
 
@@ -21,6 +46,20 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`
   )
+}
+
+function createServer() {
+  server = new BrowserWindow({
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false
+    }
+
+  })
+
+  server.loadFile(path.join(__dirname, '../api/index.html'));
 }
 
 app.on('ready', createWindow)
