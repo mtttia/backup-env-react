@@ -24,6 +24,11 @@ ipcMain.on('hello-client-from-client', (event, arg) => {
   console.log('HELLO FROM CLIENT');
 })
 
+ipcMain.on('hello-world', (event, arg) => {
+  console.log('hello world');
+  event.reply('hello-world')
+})
+
 function createWindow() { 
   createClient();
   createServer();  
@@ -37,7 +42,7 @@ function createClient() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation:false
+      contextIsolation: false,
     }
   })
 
