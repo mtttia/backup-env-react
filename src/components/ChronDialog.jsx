@@ -1,7 +1,16 @@
 import React from 'react'
-import { Select, Dialog, Button } from 'react-windows-ui'
+import {  Dialog, Button } from 'react-windows-ui'
 import { useSelector, useDispatch } from 'react-redux'
 import { setBackup } from '../features/backupInfo'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+const itemStyle = {
+  marginBottom: '10px'
+}
+
 
 export default function ChronDialog({ isOpen, onClose }) {
   const backup = useSelector(state => state.backupInfo)
@@ -19,54 +28,116 @@ export default function ChronDialog({ isOpen, onClose }) {
       // onBackdropPress={()=>{ setOpenSettingDialog(false)}}
       style={{height: height+'px', width:'100%', color:'black', padding:'10px'}}
       showDropShadow={true}>
-      <div>
-        <p style={{display:'inline', marginRight:'10px'}}>Secondi</p>
-        <Select
-          defaultValue={second}
-          onChange={(value) => setsecond(value)}
-          data={seconds.map(v => { return { label: v, value: v } })}
-        />
-      </div>
-      <div>
-        <p style={{ display: 'inline', marginRight: '10px' }}>Minuti</p>
-        <Select
-          defaultValue={minute}
-          onChange={(value) => setminute(value)}
-          data={minutes.map(v => { return { label: v, value: v } })}
-        />
-      </div>
-      <div>
-        <p style={{ display: 'inline', marginRight: '10px' }}>Ore</p>
-        <Select
-          defaultValue={hour}
-          onChange={(value) => sethour(value)}
-          data={hours.map(v => { return { label: v, value: v } })}
-        />
-      </div>
-      <div>
-        <p style={{ display: 'inline', marginRight: '10px' }}>Giorno del mese</p>
-        <Select
-          defaultValue={dayMont}
-          onChange={(value) => setdayMont(value)}
-          data={dayMonths.map(v => { return { label: v, value: v } })}
-        />
-      </div>
-      <div>
-        <p style={{ display: 'inline', marginRight: '10px' }}>Mese</p>
-        <Select
-          defaultValue={month}
-          onChange={(value) => setmonth(value)}
-          data={months}
-        />
-      </div>
-      <div>
-        <p style={{ display: 'inline', marginRight: '10px' }}>Giorno della settimana</p>
-        <Select
-          defaultValue={dayWeek}
-          onChange={(value) => setdayWeek(value)}
-          data={dayWeeks}
-        />
-      </div>
+      <div className="container">
+        <div className='row'>
+          <p className='col-4'>Secondi</p>
+          <FormControl className='col-8'>
+            <InputLabel id="second">Secondi</InputLabel>
+            <Select
+              labelId="second"
+              value={second}
+              label="Secondi"
+              onChange={(e) => setsecond(e.target.value)}
+            >
+              {
+                seconds.map(v =>
+                  <MenuItem value={v}>{v}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>
+        <div className='row mt-3'>
+          <p className='col-4'>Minuti</p>          
+          <FormControl className='col-8'>
+            <InputLabel id="minute">Minuti</InputLabel>
+            <Select
+              labelId="minute"
+              value={minute}
+              label="Minuti"
+              onChange={(e) => setminute(e.target.value)}
+            >
+              {
+                minutes.map(v =>
+                  <MenuItem value={v}>{v}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>
+        <div className='row mt-3'>
+          <p className='col-4'>Ore</p>
+          <FormControl className='col-8'>
+            <InputLabel id="hour">Ore</InputLabel>
+            <Select
+              labelId="hour"
+              value={hour}
+              label="Ore"
+              onChange={(e) => sethour(e.target.value)}
+            >
+              {
+                hours.map(v =>
+                  <MenuItem value={v}>{v}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>
+        <div className='row mt-3'>
+          <p className='col-4'>Giorno del mese</p>
+          <FormControl className='col-8'>
+            <InputLabel id="dayMont">Giorno del mese</InputLabel>
+            <Select
+              labelId="dayMont"
+              value={dayMont}
+              label="Giorno del mese"
+              onChange={(e) => setdayMont(e.target.value)}
+            >
+              {
+                dayMonths.map(v =>
+                  <MenuItem value={v}>{v}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>
+        <div className='row mt-3'>
+          <p className='col-4'>Mese</p>
+          <FormControl className='col-8'>
+            <InputLabel id="month">Mese</InputLabel>
+            <Select
+              labelId="month"
+              value={month}
+              label="Mese"
+              onChange={(e) => setmonth(e.target.value)}
+            >
+              {
+                months.map(v =>
+                  <MenuItem value={v.value}>{v.label}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>       
+        <div className='row mt-3'>
+          <p className='col-4'>Giorno della settimana</p>
+          <FormControl className='col-8'>
+            <InputLabel id="deyWeek">Giorno della settimana</InputLabel>
+            <Select
+              labelId="deyWeek"
+              value={dayWeek}
+              label="GIorno della settimana"
+              onChange={(e) => setdayWeek(e.target.value)}
+            >
+              {
+                dayWeeks.map(v =>
+                  <MenuItem value={v.value}>{v.label}</MenuItem>
+                )
+              }
+            </Select>
+          </FormControl>
+        </div>
+      </div>      
       <Button
         style={{ margin: '15px', float: 'right' }}
         value="Chiudi"
