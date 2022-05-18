@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ThemeProvider } from '@mui/material/styles';
-
+import 'react-windows-ui/config/app-config.css'
+import 'react-windows-ui/dist/react-windows-ui.min.css'
+import 'react-windows-ui/icons/fonts/fonts.min.css'
 import store from './app/store'
 import { Provider } from 'react-redux'
 import themeLoader from './theme/themeLoader';

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { useSelector } from 'react-redux'
 import { Dialog, Button } from 'react-windows-ui'
+import ChronDialog from './components/ChronDialog';
 
 
 function App({event}) {
@@ -10,17 +11,11 @@ function App({event}) {
   
   return (
     <div>
-      <Dialog
-        isVisible={openSettingDialog}
-        onBackdropPress={() => { setOpenSettingDialog(false) }}
-        showDropShadow={true}>
-        ciao a tutti
-
-        <Button
-          style={{ margin: '15px', float: 'right' }}
-          value="Close"
-          onClick={()=>{setOpenSettingDialog(false)}} />
-      </Dialog>
+      <Button
+        style={{ margin: '15px', float: 'right' }}
+        value="Apri"
+        onClick={() => { setOpenSettingDialog(true) }} />
+      <ChronDialog isOpen={openSettingDialog} onClose={()=>{setOpenSettingDialog(false)}} />
     </div>
   );
 }
