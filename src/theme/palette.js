@@ -5,7 +5,7 @@ const palette = {
   },
   secondary: {
     light: '#264653',
-    dark: '#ffffff'
+    dark: '#264653'
   },
   accent: {
     light: '#F4A261',
@@ -13,7 +13,7 @@ const palette = {
   },
   background: {
     light: '#ededed',
-    dark: '#00303D'
+    dark: '#ededed'
   },
   red: {
     light: '#E76F51',
@@ -21,19 +21,19 @@ const palette = {
   },
   whiteBox: {
     light: '#ffffff',
-    dark: '#004052'
+    dark: '#ffffff'
   },
   boxShadow: {
     light: '#dddddd',
-    dark: '#002029'
+    dark: '#dddddd'
   },
   textColor: {
     light: '#000000',
-    dark: '#ffffff'
+    dark: '#000000'
   },
   footerBackGround: {
     light: '#ffffff',
-    dark: '#000000'
+    dark: '#ffffff'
   }
 }
   

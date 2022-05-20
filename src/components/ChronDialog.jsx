@@ -29,6 +29,10 @@ export default function ChronDialog({ isOpen, onClose }) {
       style={{height: height+'px', width:'100%', color:'black', padding:'10px'}}
       showDropShadow={true}>
       <div className="container">
+        <div className="row">
+          <h2>Seleziona li impostazini di configurazione</h2>
+        </div>
+        <hr />
         <div className='row'>
           <p className='col-4'>Secondi</p>
           <FormControl className='col-8'>
