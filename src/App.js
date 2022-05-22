@@ -16,16 +16,16 @@ function App({event}) {
       {
         backup
           ? null
-          : <NotSetted openDoBakcup={() => { setOpenDoBakcup(true) }} openSettingDialog={()=>{setOpenSettingDialog(true)}} />          
+          : <NotSetted openDoBakcup={() => { setOpenDoBakcup(true) }} openSettingDialog={() => { setOpenSettingDialog(true) }} event={event} />          
       }
 
-      <DoBackup isOpen={openDoBakcup} onClose={() => setOpenDoBakcup(false)} />
+      <DoBackup isOpen={openDoBakcup} onClose={() => setOpenDoBakcup(false)} event={event }/>
       <ChronDialog isOpen={openSettingDialog} onClose={()=>{setOpenSettingDialog(false)}} />
     </div>
   );
 }
 
-function NotSetted({openSettingDialog, openDoBakcup}) {
+function NotSetted({openSettingDialog, openDoBakcup, event}) {
   
   return (
     <div className='container p-4'>

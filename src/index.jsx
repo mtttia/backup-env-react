@@ -9,7 +9,7 @@ import 'react-windows-ui/icons/fonts/fonts.min.css'
 import store from './app/store'
 import { Provider } from 'react-redux'
 import themeLoader from './theme/themeLoader';
-import EventEmitter from 'events'
+import eManager from './event'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -18,14 +18,16 @@ ipcRenderer.on('hello-client', (event, arg) => {
   ipcRenderer.send('hello-client-from-client', 'Hello from client')
 })
 
-const eManager = new EventEmitter();
 
-eManager.on('hello-world', (args) => {
-  ipcRenderer.send('hello-world');
-})
+
 
 ipcRenderer.on('hello-world', (e, args) => {
   alert('Hello world')
+})
+
+ipcRenderer.on('backup-done', (e, args) => {
+  alert('Backup done')
+  console.log(args);
 })
 
 

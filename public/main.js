@@ -13,6 +13,19 @@ ipcMain.on('server-ready', (event, arg) => {
 
 ipcMain.on('hello-client-from-server', (event, arg) => {
   console.log("HELLO FROM SERVER")
+  // server.webContents.send('backup', { src: 'C:\\Users\\matti\\Documents\\Progetti\\ELECTRON\\backup-env-react\\example\\src', dest:'C:\\Users\\matti\\Documents\\Progetti\\ELECTRON\\backup-env-react\\example\\dist'});
+})
+
+ipcMain.on('backup-done', (event, arg) => {
+  //if win exoist and is not destroyed then send message
+  if (win && !win.isDestroyed()) {
+    win.webContents.send('backup-done', arg);
+  }
+})
+
+ipcMain.on('backup', (event, arg) => {
+  console.log('here',arg);
+  server.webContents.send('backup', arg);
 })
 
 ipcMain.on('client-ready', (event, arg) => { 
@@ -55,7 +68,7 @@ function createClient() {
 
 function createServer() {
   server = new BrowserWindow({
-    show: false,
+    show: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -63,6 +76,8 @@ function createServer() {
     }
 
   })
+
+  server.webContents.openDevTools();
 
   server.loadFile(path.join(__dirname, '../api/index.html'));
 }
