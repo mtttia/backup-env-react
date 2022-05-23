@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
+const fsIntegration = require('./fsIntegration');
 
 const path = require('path')
 const isDev = require('electron-is-dev')
@@ -16,24 +17,12 @@ ipcMain.on('hello-client-from-server', (event, arg) => {
   // server.webContents.send('backup', { src: 'C:\\Users\\matti\\Documents\\Progetti\\ELECTRON\\backup-env-react\\example\\src', dest:'C:\\Users\\matti\\Documents\\Progetti\\ELECTRON\\backup-env-react\\example\\dist'});
 })
 
-ipcMain.on('backup-done', (event, arg) => {
-  //if win exoist and is not destroyed then send message
-  if (win && !win.isDestroyed()) {
-    win.webContents.send('backup-done', arg);
-  }
-})
-
-ipcMain.on('backup', (event, arg) => {
-  console.log('here',arg);
-  server.webContents.send('backup', arg);
-})
-
-ipcMain.on('client-ready', (event, arg) => { 
+ipcMain.on('client-ready', (event, arg) => {
   console.log('CLIENT READY');
   win.webContents.send('hello-client', 'Hello from client');
 })
 
-ipcMain.on('hello-client-from-client', (event, arg) => { 
+ipcMain.on('hello-client-from-client', (event, arg) => {
   console.log('HELLO FROM CLIENT');
 })
 
@@ -42,7 +31,25 @@ ipcMain.on('hello-world', (event, arg) => {
   event.reply('hello-world')
 })
 
+ipcMain.on('backup-done', (event, arg) => {
+  fsIntegration.updateBackup(arg);
+  //if win exoist and is not destroyed then send message
+  if (win && !win.isDestroyed()) {
+    win.webContents.send('backup-done', arg);
+  }
+})
+
+ipcMain.on('backup', (event, arg) => {  
+  server.webContents.send('backup', arg);
+})
+
+ipcMain.on('setting', (event, arg) => { 
+  fsIntegration.updateSetting(arg);
+  server.webContents.send('setting', arg);
+})
+
 function createWindow() { 
+  fsIntegration.init();
   createClient();
   createServer();  
 }

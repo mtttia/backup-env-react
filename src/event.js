@@ -11,8 +11,8 @@ eManager.on('backup', (args) => {
   ipcRenderer.send('backup', args);
 })
 
-eManager.on('asksrc', (args) => {
-
+eManager.on('setting', (args) => {
+  ipcRenderer.send('setting', args);
 })
 
 export default eManager

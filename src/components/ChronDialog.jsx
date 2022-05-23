@@ -12,7 +12,7 @@ const itemStyle = {
 }
 
 
-export default function ChronDialog({ isOpen, onClose }) {
+export default function ChronDialog({ isOpen, onClose, event }) {
   const backup = useSelector(state => state.backupInfo)
   const [second, setsecond] = React.useState(backup ? backup.second : '*');
   const [minute, setminute] = React.useState(backup ? backup.minute : '*');
@@ -21,6 +21,12 @@ export default function ChronDialog({ isOpen, onClose }) {
   const [month, setmonth] = React.useState(backup ? backup.month : '*');
   const [dayWeek, setdayWeek] = React.useState(backup ? backup.dayWeek : '*');
   const height = window.outerHeight
+
+  const sendSetting = () => {
+    const data = `${second} ${minute} ${hour} ${dayMont} ${month} ${dayWeek}`
+    event.emit('setting',data)
+    onClose()
+  }
 
   return (
     <Dialog
@@ -142,10 +148,17 @@ export default function ChronDialog({ isOpen, onClose }) {
           </FormControl>
         </div>
       </div>      
-      <Button
-        style={{ margin: '15px', float: 'right' }}
-        value="Chiudi"
-        onClick={onClose} />
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mt-5">
+        <Button
+          value="AGGIORNA LE IMPOSTAZIONI"
+          type="primary"
+          onClick={sendSetting} />
+        <div className="app-space-15"></div>
+        <Button
+          value="Chiudi"
+          onClick={onClose} />
+
+      </div>
     </Dialog>
   )
 }

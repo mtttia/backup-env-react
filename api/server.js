@@ -14,3 +14,7 @@ ipcRenderer.on('backup', (event, arg) => {
     ipcRenderer.send('backup-done', report)
   })
 })
+
+ipcRenderer.on('setting', (event, arg) => {
+  console.log('setting', arg)
+})
