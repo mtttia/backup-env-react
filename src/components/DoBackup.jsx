@@ -42,7 +42,7 @@ export default function ChronDialog({ isOpen, onClose, event }) {
                 properties: ['openDirectory']
               }).then((filePaths) => {
                 
-                setsrc(parseUrl(filePaths.filePaths[0]))
+                filePaths ?? setsrc(parseUrl(filePaths.filePaths[0]))
               })
             }} />
           </div>
@@ -61,9 +61,8 @@ export default function ChronDialog({ isOpen, onClose, event }) {
             <Button value='Browse' type="primary" onClick={() => {
               dialog.showOpenDialog({
                 properties: ['openDirectory']
-              }).then((filePaths) => {
-
-                setdist(parseUrl(filePaths.filePaths[0]))
+              }).then((filePaths) => {                
+                filePaths ?? setdist(parseUrl(filePaths.filePaths[0]))
               })
             }} />
           </div>

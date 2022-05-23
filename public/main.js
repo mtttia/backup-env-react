@@ -68,7 +68,7 @@ function createClient() {
 
 function createServer() {
   server = new BrowserWindow({
-    show: true,
+    show: false,  
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

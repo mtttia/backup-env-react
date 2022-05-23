@@ -18,9 +18,6 @@ ipcRenderer.on('hello-client', (event, arg) => {
   ipcRenderer.send('hello-client-from-client', 'Hello from client')
 })
 
-
-
-
 ipcRenderer.on('hello-world', (e, args) => {
   alert('Hello world')
 })

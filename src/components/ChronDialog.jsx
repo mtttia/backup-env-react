@@ -30,7 +30,7 @@ export default function ChronDialog({ isOpen, onClose }) {
       showDropShadow={true}>
       <div className="container">
         <div className="row">
-          <h2>Seleziona li impostazini di configurazione</h2>
+          <h2>Seleziona le impostazini di configurazione</h2>
         </div>
         <hr />
         <div className='row'>

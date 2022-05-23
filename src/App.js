@@ -39,10 +39,10 @@ function NotSetted({openSettingDialog, openDoBakcup, event}) {
       </div>
       <div className='row mt-5'>
         <div className='col-6 d-flex justify-content-center'>
-          <Button onClick={openSettingDialog} value="Configura ENV Backup" className="col-6" />
+          <Button onClick={openSettingDialog} value="Configura ENV Backup" type="primary" className="col-6" />
         </div>
         <div className='col-6 d-flex justify-content-center'>
-          <Button onClick={openDoBakcup} value="Fai un backup" className="col-6" />
+          <Button onClick={openDoBakcup} value="Fai un backup" className="col-6" type="primary-outline" />
         </div>        
       </div>
         

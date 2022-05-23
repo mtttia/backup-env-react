@@ -8,7 +8,6 @@ eManager.on('hello-world', (args) => {
 })
 
 eManager.on('backup', (args) => {
-  alert('devo fare un backup')
   ipcRenderer.send('backup', args);
 })
 
