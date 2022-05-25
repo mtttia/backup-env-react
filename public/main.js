@@ -59,6 +59,8 @@ function createClient() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 600,
+    minHeight: 400,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -75,7 +77,7 @@ function createClient() {
 
 function createServer() {
   server = new BrowserWindow({
-    show: false,  
+    show: true,  
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

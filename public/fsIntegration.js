@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 /**
  * create a folder called 'data' then create in this folder two files: 'backup.json' and 'setting.json', then write into backup.json '[]'
@@ -26,12 +27,24 @@ function updateBackup(backup) {
   fs.writeFileSync(backupPath, JSON.stringify(json));
 }
 
+function getBackup() {
+  let data = fs.readFileSync(backupPath);
+  return JSON.parse(data);
+}
+
 function updateSetting(setting) {
   fs.writeFileSync(settingPath, JSON.stringify(setting));
+}
+
+function getSetting() {
+  let data = fs.readFileSync(settingPath);
+  return JSON.parse(data);
 }
 
 module.exports = {
   init,
   updateBackup,
-  updateSetting
+  updateSetting,
+  getBackup,
+  getSetting
 }

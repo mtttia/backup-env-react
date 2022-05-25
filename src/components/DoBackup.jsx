@@ -41,8 +41,12 @@ export default function ChronDialog({ isOpen, onClose, event }) {
               dialog.showOpenDialog({
                 properties: ['openDirectory']
               }).then((filePaths) => {
-                
-                filePaths ?? setsrc(parseUrl(filePaths.filePaths[0]))
+                console.log(filePaths)
+                if (filePaths.canceled) {
+                  return
+                }
+                else
+                  filePaths && setsrc(parseUrl(filePaths.filePaths[0]))
               })
             }} />
           </div>
@@ -62,7 +66,11 @@ export default function ChronDialog({ isOpen, onClose, event }) {
               dialog.showOpenDialog({
                 properties: ['openDirectory']
               }).then((filePaths) => {                
-                filePaths ?? setdist(parseUrl(filePaths.filePaths[0]))
+                if (filePaths.canceled){
+                  return
+                }
+                else
+                setdist(parseUrl(filePaths.filePaths[0]))
               })
             }} />
           </div>
